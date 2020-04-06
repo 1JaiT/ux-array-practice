@@ -1,26 +1,27 @@
 /*
     Arrays Practice
-
     In these exercises your refridgerator is going to be represented an array.
-
     let fridge = ["milk", "cheese", "butter"];
     
     Each element of the array is an item in your fridge.
-
     Complete the Following Exercises.
-
 */
 
 /* ------------------------------------------------
     Exercise One
-
     Checking if you have something in the fridge
 */
 
 function fridgeContains(fridge, item) {
-    // Your code here.  Check if the item is in the fridge, return true or false.
-    return false;
+    if (fridge.includes(item)) {
+        return true ;
+    } else {
+        return false
+    }
 }
+
+
+
 
 /* 
    -------TESTS---------------------------------------------------------------
@@ -37,17 +38,20 @@ console.log(!fridgeContains(fridge, "eggplant"));
 
 /* ------------------------------------------------
     Exercise Two
-
     Putting something in the fridge
-
     Put the item into the fridge.
     If the fridge already contains the item, don't add another!
     Hint: That means you will have to check if an item is in the fridge first!
 */
 
 function putItemIntoFridge(fridge, item) {
-    // Your code here.
+    if (!fridge.includes (item)) {
+        fridge.push(item);
+    }
+
 }
+
+
 
 /* 
    -------TESTS---------------------------------------------------------------
@@ -66,18 +70,19 @@ console.log(fridge2.length == previousLength + 1 && fridge2.includes("kale"));
 
 /* ------------------------------------------------
     Exercise Three
-
     Taking something out of the fridge
-
     After you take something out of the fridge, then the fridge no longer contains that item.
-
     Given the name of an item, 
     if it exists in the fridge then remove it and return the item
     if it doesn't exist in the fridge, then return null;
 */
 
 function getItemFromFridge(fridge, item) {
-    // Your code here.
+    if (fridge.includes(item)) {
+        let selectedItem = fridge.indexOf(item);
+        let removeItem = fridge.splice(selectedItem, 1);
+        return removeItem ;
+    }
 }
 
 /* 
@@ -103,9 +108,7 @@ console.log(emptyFridge.length == 0 && item == null);
 
 /* ------------------------------------------------
     Exercise Four
-
     A more complex fridge.
-
     You bought a new fridge, and this fridge allows you to store multiple copies of each item!
     Every type of item in your fridge is represented by an array.  So your fridge works like
     a two-dimensional array.
@@ -123,12 +126,9 @@ console.log(emptyFridge.length == 0 && item == null);
     
     This will set the index variable to 1
     Then to access the egg array, do:
-
     let eggArray = fridge[eggIndex];
-
     This will assign ["egg", "egg", "egg", "egg"] to the egg array.
     Then you can interact with it the same way you did from Exercise three.
-
     Write the code for the getItemFromNewFridge() and putItemIntoNewFridge() functions.
 */
 
@@ -156,31 +156,49 @@ function getIndexOfItem(fridge, item) {
 
 /* 
    -------START OF YOUR CODE-----------------------------------------------------------
-
     example fridge:
     let fridge = [["egg", "egg", "egg", "egg"], ["butter"], ["milk"], ["cheese", "cheese"]];
 */
 
 /*
     getItemFromNewFridge
-
     If an item exists in the fridge, remove it and return the item.
     If that was the last of that item, remove the empty array for that item.
     If the item isn't in the fridge, return null.
 */
 function getItemFromNewFridge(fridge, item) {
-    // Your code here.
 }
+
+let itemIndex = getIndexOfItem(fridge, item) ;
+if (itemIndex == -1) {
+    return null ;
+}
+
+let itemArray = fridge (itemIndex);
+if (itemArray.length > 1) {
+    let itemToRemove = itemArray.splice(0, 1) ;
+    return itemToRemove ;
+} else if (itemArray.length === 1) {
+    let itemToRemove = itemArray.splice (0, 1) ;
+    fridge.splice(itemIndex, 1) ;
+    return itemToRemove ;
+}
+
 
 /*
     putItemInNewFridge
-
     If there are already similar items in the fridge, add this item to their array.
     Otherwise, create a new array in the fridge and put this item in it.
 */
 function putItemInNewFridge(fridge, item) {
-    // Your code here.
+    const itemIndex = getIndexOfItem (fridge, item); 
+    if (itemIndex !== -1) {
+    fridge[itemIndex].push(item); 
+} else {
+    fridge.push([item]) ; 
 }
+}
+
 
 
 /*
