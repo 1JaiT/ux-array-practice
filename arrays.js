@@ -200,7 +200,6 @@ function putItemInNewFridge(fridge, item) {
 }
 
 
-
 /*
    -------END OF YOUR CODE-----------------------------------------------------------
 */
